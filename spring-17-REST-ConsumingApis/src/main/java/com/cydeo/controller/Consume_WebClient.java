@@ -13,9 +13,10 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-public class Consume_WebClient {
+public class Consume_WebClient {  // reactive programming -- how it works  ----> sync and Async
 
     private WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
+                                                            // this should be third party API url
 
     private final MovieCinemaService movieCinemaService;
     private final GenreService genreService;
@@ -28,7 +29,7 @@ public class Consume_WebClient {
     @GetMapping("/flux-movie-cinemas")
     public Flux<MovieCinemaDTO> readAllCinemaFlux(){
 
-        return Flux.fromIterable(movieCinemaService.findAll());
+        return Flux.fromIterable(movieCinemaService.findAll());  // Flux means multiple elements
 
     }
 
@@ -61,31 +62,33 @@ public class Consume_WebClient {
 
         genreService.deleteById(id);
 
-        return Mono.empty();
+        return Mono.empty();  // will not send anything back
     }
 
 //    ---------------------------WEBCLIENT---------------------------
 
-    @GetMapping("/flux")
+    // this structure should be in service layer
+
+    @GetMapping("/flux")  // consume reactive API
     public Flux<MovieCinemaDTO> readWithWebClient(){
 
         return webClient
                 .get()
-                .uri("/flux-movie-cinemas")
+                .uri("/flux-movie-cinemas")  // we give an endpoint, and it is combing it with baseUrl on top
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .retrieve()
-                .bodyToFlux(MovieCinemaDTO.class);
+                .bodyToFlux(MovieCinemaDTO.class);  // it will give multiple MovieCinema objs
 
     }
 
-    @GetMapping("/mono/{id}")
+    @GetMapping("/mono/{id}")  // consume reactive API
     public Mono<MovieCinemaDTO> readMonoWithWebClient(@PathVariable("id") Long id){
 
         return webClient
                 .get()
                 .uri("/mono-movie-cinema/{id}",id)
                 .retrieve()
-                .bodyToMono(MovieCinemaDTO.class);
+                .bodyToMono(MovieCinemaDTO.class);  // it will give only one obj
 
     }
 

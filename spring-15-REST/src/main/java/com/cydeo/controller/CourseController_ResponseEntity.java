@@ -19,7 +19,7 @@ public class CourseController_ResponseEntity {
     }
 
     @GetMapping
-    public ResponseEntity<List<CourseDTO>> getAllCourses(){
+    public ResponseEntity<List<CourseDTO>> getAllCourses(){   // By using ResponseEntity we can manipulate status Code and others(Headers...) of our response
         return ResponseEntity
                 .status(HttpStatus.ACCEPTED)
                 .header("Version","Cydeo.V2")
@@ -37,17 +37,18 @@ public class CourseController_ResponseEntity {
         return ResponseEntity.ok(courseService.getCoursesByCategory(category));
     }
 
-    @PostMapping
+    @PostMapping   // means we will use this controller method to create some data by using java inside of method itself
+    // it is only for capturing the request coming from Postman and go on with the impl which match with business logic
     public ResponseEntity<CourseDTO> createCourse(@RequestBody CourseDTO course){
         return ResponseEntity
-                .status(HttpStatus.CREATED)
+                .status(HttpStatus.CREATED) // not have to send back a meaningful status code. can send any status code
                 .header("Operation","Create")
                 .body(courseService.createCourse(course));
 
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteCourseById(@PathVariable("id") Long courseId){
+    public ResponseEntity<Void> deleteCourseById(@PathVariable("id") Long courseId){   // This method will return empty body
         courseService.deleteCourseById(courseId);
         return ResponseEntity.noContent().build();
     }

@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)  // not show the null field
 public class TeacherDTO {
 
     @JsonIgnore
@@ -28,7 +28,9 @@ public class TeacherDTO {
     private String email;
     private String username;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    //Json is holding object, and the field of the object is also called property
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)  // write only -- it means we can only use this field in request - user can write sth and send
+                                                            // read only - user cannot send information, but server can send information to user, and they can read
     private String password;
 
     private LocalDate birthday;

@@ -29,14 +29,14 @@ public class AddressDTO {
 
     private AddressType addressType;
 
-    @JsonBackReference(value = "student-address-reference")          // defaultReference
+    @JsonBackReference(value = "student-address-reference")          // defaultReference  if we have multiple JsonBackReference, we have to give the name/value
     private StudentDTO student;
 
     @JsonBackReference(value = "parent-address-reference")          // defaultReference
     private ParentDTO parent;
 
-    @JsonBackReference(value = "teacher-address-reference")          // defaultReference
-    private TeacherDTO teacher;
+    @JsonBackReference(value = "teacher-address-reference")          // defaultReference  -- it will know which field match with which object and hide it
+    private TeacherDTO teacher;  // we are hiding this field
 
     private Integer currentTemperature;     // Weather information, which we will later get it from 3rd party API
 

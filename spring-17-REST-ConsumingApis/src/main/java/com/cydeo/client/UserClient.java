@@ -10,6 +10,6 @@ import java.util.List;
 public interface UserClient {
 
     @GetMapping("/users")
-    List<User> getUsers();
+    List<User> getUsers();  // when we call this method somewhere, it will go to above URL and this endpoint and give back response in List of User format
 
 }

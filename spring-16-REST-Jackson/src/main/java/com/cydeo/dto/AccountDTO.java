@@ -9,10 +9,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 //@JsonIgnoreProperties(value = {"address", "country"}, ignoreUnknown = true)
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(ignoreUnknown = true)  // if in request some field is unknown and not needed
 public class AccountDTO {
 
-    @JsonIgnore
+    @JsonIgnore  // this field will be ignored in both requestBody and ResponseBody
     private String name;
     private String address;
     private String country;
@@ -21,7 +21,7 @@ public class AccountDTO {
     private Integer age;
     private String postalCode;
 
-    @JsonBackReference  // This field is not going to be serialized
+    @JsonBackReference  // This field is not going to be serialized -- means in Json reference we will not see this field
     private UserDTO user;
 
 }
