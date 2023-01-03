@@ -12,7 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
+@ExtendWith(MockitoExtension.class)   // mockito and Junit work together properly, mockito is introducing its structure to junit, so junit can use it
 class UserServiceImplTest {
 
     @Mock
@@ -33,6 +33,7 @@ class UserServiceImplTest {
         // I'm checking if this method ran or not.
         verify(userRepository).findByUserNameAndIsDeleted("harold@manager.com", false);
 
+        //checking if it is running one time or not
         verify(userRepository, times(1)).findByUserNameAndIsDeleted("harold@manager.com", false);
 
         verify(userRepository, atLeastOnce()).findByUserNameAndIsDeleted("harold@manager.com", false);
