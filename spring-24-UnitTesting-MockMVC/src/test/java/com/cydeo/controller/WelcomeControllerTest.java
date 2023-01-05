@@ -38,7 +38,7 @@ public class WelcomeControllerTest {
         RequestBuilder request = MockMvcRequestBuilders.get("/welcome")
                 .accept(MediaType.APPLICATION_JSON);
 
-        mvc.perform(request)
+        mvc.perform(request)   // kt is like clicking send button in postman
                 .andExpect(status().isOk())
                 .andExpect(content().string("welcome"))
                 .andReturn();

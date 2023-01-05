@@ -9,7 +9,7 @@ class CalculatorTest {
     @BeforeAll
     static void setUpAll() {
         System.out.println("BeforeAll is executed.");
-    }
+    }  //before all and after all method has to be static
 
     @AfterAll
     static void tearDownAll() {

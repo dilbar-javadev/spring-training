@@ -21,7 +21,7 @@ class UserServiceImplTest {
     @Mock
     UserMapper userMapper;
 
-    @InjectMocks
+    @InjectMocks   // does no work with interface, only with class, so we should have impl class
     UserServiceImpl userService;
 
     @Test
